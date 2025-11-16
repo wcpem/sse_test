@@ -1,0 +1,17 @@
+# 開発用 Dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+# 依存関係をインストール
+COPY package*.json ./
+RUN npm ci
+
+# アプリケーションコードをコピー
+COPY . .
+
+# ポート5173を公開
+EXPOSE 5173
+
+# 開発サーバー起動
+CMD ["npm", "run", "dev", "--", "--host"]
